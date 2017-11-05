@@ -1,0 +1,19 @@
+current directory: /home/mamba/First/serv/vendor/bundle/ruby/2.4.0/gems/bcrypt-3.1.11/ext/mri
+/home/mamba/.rvm/rubies/ruby-2.4.2/bin/ruby -r ./siteconf20171105-15254-12yhx3y.rb extconf.rb
+creating Makefile
+
+current directory: /home/mamba/First/serv/vendor/bundle/ruby/2.4.0/gems/bcrypt-3.1.11/ext/mri
+make "DESTDIR=" clean
+
+current directory: /home/mamba/First/serv/vendor/bundle/ruby/2.4.0/gems/bcrypt-3.1.11/ext/mri
+make "DESTDIR="
+compiling bcrypt_ext.c
+compiling crypt.c
+compiling crypt_blowfish.c
+compiling crypt_gensalt.c
+compiling wrapper.c
+linking shared-object bcrypt_ext.so
+
+current directory: /home/mamba/First/serv/vendor/bundle/ruby/2.4.0/gems/bcrypt-3.1.11/ext/mri
+make "DESTDIR=" install
+/usr/bin/install -m 0755 bcrypt_ext.so ./.gem.20171105-15254-50sj7u

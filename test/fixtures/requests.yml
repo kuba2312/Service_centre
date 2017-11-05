@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  client_first: MyString
+  client_last: MyString
+  cost: 1.5
+  costVAT: 1.5
+  description: MyString
+  number_employee: 1
+  status: MyString
+  client_mail: MyString
+
+two:
+  name: MyString
+  client_first: MyString
+  client_last: MyString
+  cost: 1.5
+  costVAT: 1.5
+  description: MyString
+  number_employee: 1
+  status: MyString
+  client_mail: MyString
