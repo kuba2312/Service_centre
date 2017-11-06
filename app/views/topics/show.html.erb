@@ -19,7 +19,7 @@
 
 <hr>
 
-<% if logged_in? && current_employee.follows?(@course) %>
+<% if logged_in? && current_employee.follows?(@request) %>
   <%= link_to "Dodaj odpowiedź", new_request_topic_post_path(@request,@topic) %>
 <% end %>
 
