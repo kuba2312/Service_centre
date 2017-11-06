@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_request, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
 
   # GET /requests
   # GET /requests.json
@@ -21,6 +21,19 @@ class RequestsController < ApplicationController
   def edit
   end
 
+  def follow
+    unless current_employee.follows?(@request)
+      current_employee.requests.append(@request)
+    end
+    redirect_to @request
+  end
+
+  def unfollow
+    if current_employee.follows?(@request)
+      @request.employees.delete(current_employee)
+    end
+    redirect_to @request
+  end
   # POST /requests
   # POST /requests.json
   def create

@@ -1,49 +1,49 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @request.name %>
-</p>
+<h1><%= @request.name %></h1>
+<p><%= @request.description %></p>
+<h4><%= @request.number_employee %></h4>
 
-<p>
-  <strong>Client first:</strong>
-  <%= @request.client_first %>
-</p>
+<% if logged_in? %>
+  <% unless current_employee.follows?(@request) %>
+    <%= link_to( "Zapisz się do zlecenia", action: :follow) %>
+  <% else %>
+    <%= link_to( "Wypisz się ze zlecenia", action: :unfollow) %>
+  <% end %>
+<% end %>
 
-<p>
-  <strong>Client last:</strong>
-  <%= @request.client_last %>
-</p>
+<hr>
+<h1>Zapisani pracownicy</h1>
+<ul>
+<% @request.employees.each do |employee| %>
+  <li><%= link_to employee.nickname, employee %></li>
+<% end %>
+</ul>
 
-<p>
-  <strong>Cost:</strong>
-  <%= @request.cost %>
-</p>
+<h1>Lista tematów</h1>
+<% if @request.topics.length == 0 %>
+  Nie ma żadnego tematu
+<% else %>
+  <% @request.topics.each do |topic| %>
+    <%= link_to [@request, topic] do %>
+    <h4><%= topic.title %> by <%= topic.employee.nickname %></h4>
+    <% end %>
+    <% topic.posts.each do |post| %>
+      <p>
+        <%= post.body %>
+      </p>
+      <h6>by <%= post.employee.nickname %></h6>
+    <% end %>
+  <% end %>
+<% end %>
 
-<p>
-  <strong>Costvat:</strong>
-  <%= @request.costVAT %>
-</p>
+<hr>
 
-<p>
-  <strong>Description:</strong>
-  <%= @request.description %>
-</p>
-
-<p>
-  <strong>Number employee:</strong>
-  <%= @request.number_employee %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @request.status %>
-</p>
-
-<p>
-  <strong>Client mail:</strong>
-  <%= @request.client_mail %>
-</p>
+<% if logged_in? && current_employee.follows?(@request) %>
+  <%= link_to "Dodaj temat", new_request_topic_path(@request) %>
+<% end %>
 
 <%= link_to 'Edit', edit_request_path(@request) %> |
 <%= link_to 'Back', requests_path %>
+
+<p>

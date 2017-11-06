@@ -14,7 +14,8 @@ class TopicsController < ApplicationController
 
   # GET /topics/new
   def new
-    @topic = Topic.new
+    @request = Request.find(params[:request_id])
+    @topic = @request.topics.new
   end
 
   # GET /topics/1/edit
@@ -24,25 +25,27 @@ class TopicsController < ApplicationController
   # POST /topics
   # POST /topics.json
   def create
-    @topic = Topic.new(topic_params)
+    @request = Request.find(params[:request_id])
+    @topic = @request.topics.new(topic_params)
+    @topic.employee = current_employee
 
-    respond_to do |format|
-      if @topic.save
-        format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
-        format.json { render :show, status: :created, location: @topic }
-      else
-        format.html { render :new }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
-      end
+  respond_to do |format|
+    if @topic.save
+      format.html { redirect_to [@request, @topic], notice: 'Topic was successfully created.' }
+      format.json { render :show, status: :created, location: @topic }
+    else
+      format.html { render :new }
+      format.json { render json: @topic.errors, status: :unprocessable_entity }
     end
   end
+end
 
   # PATCH/PUT /topics/1
   # PATCH/PUT /topics/1.json
   def update
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to @topic, notice: 'Topic was successfully updated.' }
+        format.html { redirect_to [@request, @topic], notice: 'Topic was successfully updated.' }
         format.json { render :show, status: :ok, location: @topic }
       else
         format.html { render :edit }
@@ -64,6 +67,7 @@ class TopicsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_topic
+      @request = Request.find(params[:request_id])
       @topic = Topic.find(params[:id])
     end
 

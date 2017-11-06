@@ -1,19 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @topic.title %>
-</p>
+<h1><%= @topic.title %> by <%= link_to @topic.employee.nickname, @topic.employee %></h1>
+<h2><%= link_to @request.name, @request %></h2>
 
-<p>
-  <strong>Employee:</strong>
-  <%= @topic.employee %>
-</p>
+<hr>
+<h1>Lista odpowiedzi</h1>
+<% if @topic.posts.length == 0 %>
+  Nie ma żadnych odpowiedzi
+<% else %>
+  <ul>
+  <% @topic.posts.each do |post| %>
+    <li>
+      <strong><%= post.employee.nickname %> pisze:</strong> <%= post.body %>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
 
-<p>
-  <strong>Request:</strong>
-  <%= @topic.request %>
-</p>
+<hr>
 
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+<% if logged_in? && current_employee.follows?(@course) %>
+  <%= link_to "Dodaj odpowiedź", new_request_topic_post_path(@request,@topic) %>
+<% end %>
+
+<hr>
+
+<%= link_to 'Edit', edit_request_topic_path(@request, @topic) %> |
+<%= link_to 'Back', @request %>
