@@ -12,38 +12,29 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :"Tytuł zgłoszenia" %>
     <%= form.text_field :name, id: :request_name %>
   </div>
 
   <div class="field">
-    <%= form.label :client_first %>
-    <%= form.text_field :client_first, id: :request_client_first %>
+    <%= form.label :"Imię klienta" %>
+    <%= form.text_field :"client_first", id: :request_client_first %>
   </div>
 
   <div class="field">
-    <%= form.label :client_last %>
+    <%= form.label :"Nazwisko klienta" %>
     <%= form.text_field :client_last, id: :request_client_last %>
   </div>
 
   <div class="field">
-    <%= form.label :cost %>
+    <%= form.label :"Koszt usługi" %>
     <%= form.text_field :cost, id: :request_cost %>
   </div>
 
-  <div class="field">
-    <%= form.label :costVAT %>
-    <%= form.text_field :costVAT, id: :request_costVAT %>
-  </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label :"Opis" %>
     <%= form.text_field :description, id: :request_description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :number_employee %>
-    <%= form.number_field :number_employee, id: :request_number_employee %>
   </div>
 
   <div class="field">
@@ -52,7 +43,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :client_mail %>
+    <%= form.label :"Adres e-mail klienta" %>
     <%= form.text_field :client_mail, id: :request_client_mail %>
   </div>
 

@@ -22,14 +22,16 @@ class RequestsController < ApplicationController
   end
 
   def follow
-    unless current_employee.follows?(@request)
+    unless (current_employee.follows?(@request) && @request.number_employee < 2)
       current_employee.requests.append(@request)
+      @request.more_employees
     end
     redirect_to @request
   end
 
   def unfollow
     if current_employee.follows?(@request)
+      @request.less_employees
       @request.employees.delete(current_employee)
     end
     redirect_to @request
@@ -38,7 +40,7 @@ class RequestsController < ApplicationController
   # POST /requests.json
   def create
     @request = Request.new(request_params)
-
+    @request.how_much
     respond_to do |format|
       if @request.save
         format.html { redirect_to @request, notice: 'Request was successfully created.' }
@@ -55,6 +57,7 @@ class RequestsController < ApplicationController
   def update
     respond_to do |format|
       if @request.update(request_params)
+        @request.how_much
         format.html { redirect_to @request, notice: 'Request was successfully updated.' }
         format.json { render :show, status: :ok, location: @request }
       else
